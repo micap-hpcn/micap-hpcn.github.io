@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="gl" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="None" /><meta name="author" content="Xoan C. Pardo" /><link rel="canonical" href="https://micap-hpcn.github.io/" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>HPC na Nube</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "AWS Batch";
+        var mkdocs_page_input_path = "gl/index.md";
+        var mkdocs_page_url = "/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="." class="icon icon-home"> HPC na Nube
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">AWS Batch</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#obxectivo">Obxectivo</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#workshop-setup">Workshop setup</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#building-a-docker-container">Building a Docker container</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#set-up-aws-batch-resources">Set up AWS Batch resources</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#set-up-a-compute-environment">Set up a Compute Environment</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#set-up-a-job-definition">Set up a Job Definition</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#run-batch-jobs">Run batch jobs</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#optimize-cost-with-ec2-spot">Optimize cost with EC2 Spot</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#next-steps-and-clean-up">Next steps and clean up</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#licenza">Licenza</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">HPC na Nube</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">AWS Batch</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p>gl / <a href="/es/index.html">es</a></p>
+<h1 id="aws-batch">AWS Batch</h1>
+<p><strong>Actividade práctica sobre AWS Batch</strong></p>
+<h2 id="obxectivo">Obxectivo</h2>
+<p>O obxectivo desta actividade é comprobar de maneira práctica os conceptos básicos do servizo <a href="https://aws.amazon.com/batch/">AWS Batch</a>.</p>
+<p>Para realizar esta actividade vamos usar como base <a href="https://catalog.workshops.aws/aws-batch-deep-dive/en-US">este curso</a> dispoñíbel na plataforma AWS Workshop Studio. O curso só está dispoñíbel en inglés, pero podes axudarte, p. ex., da tradución automática integrada no teu navegador se o precisas.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Para realizar a actividade segue as instrucións do curso tendo en conta a medida que avances as indicacións que se che dan nesta páxina.</p>
+</div>
+<p>A continuación recóllense as indicacións adicionais que terás que ter en conta en cada sección do exemplo:</p>
+<h2 id="workshop-setup">Workshop setup</h2>
+<p>Para realizar a actividade vamos utilizar o Learner Lab de AWS Academy. <strong>Non fagas o que se indica no curso</strong>, no seu lugar fai os pasos seguintes:</p>
+<ol>
+<li>Accede á consola AWS desde a túa conta do Learner Lab de AWS Academy.</li>
+<li>Accede á consola do servizo Cloud9 e segue os pasos indicados <a href="https://catalog.workshops.aws/aws-batch-deep-dive/en-US/02-workshop-setup/01-own-account/02-create-cloud9">neste apartado</a> do curso para crear un ambiente Cloud9. Usa os valores indicados no curso coas seguintes excepcións:<ul>
+<li>Na propiedade <em>Timeout</em> da sección <em>New EC2 Instance</em> escolle <strong>1 hora</strong>.</li>
+<li>Na sección <em>Network settings</em> escolle a conexión <strong>Secure Shell (SSH)</strong>.</li>
+</ul>
+</li>
+<li>Accede ao ambiente Cloud9 lanzado no paso anterior e fai o seguinte:<ul>
+<li>Instala <a href="https://jqlang.github.io/jq/">JQ</a> executando nun terminal: <code>sudo yum -y install jq</code></li>
+<li>Para poder crear imaxes Docker precisamos un espazo de disco maior do proporcionado por defecto por Cloud9. Para aumentar o espazo do disco ríxido a 20GB executa: <code>curl -s https://micap-hpcn.github.io/assets/resize.sh | bash /dev/stdin 20</code></li>
+<li>Comproba que o tamaño do disco é agora de 20GB executando: <code>df -h</code></li>
+</ul>
+</li>
+</ol>
+<p><em>Imaxe: tamaño do disco despois de redimensionalo a 20GB.</em>
+<img alt="Tamaño do disco" src="assets/cloud9-df01.png" /></p>
+<h2 id="building-a-docker-container">Building a Docker container</h2>
+<p>Nesta sección sigue os pasos do curso.</p>
+<h2 id="set-up-aws-batch-resources">Set up AWS Batch resources</h2>
+<p>Nesta sección sigue os pasos do curso tendo en conta o seguinte:</p>
+<h4 id="set-up-a-compute-environment">Set up a Compute Environment</h4>
+<ul>
+<li>No paso 6, na propiedade <em>Instance role</em> escolle <strong>LabInstanceProfile</strong>.</li>
+</ul>
+<h4 id="set-up-a-job-definition">Set up a Job Definition</h4>
+<ul>
+<li>No paso 8, escolle <strong>LabRole</strong> nas propiedades <em>Execution role</em> e <em>Job role configuration</em>.</li>
+</ul>
+<h2 id="run-batch-jobs">Run batch jobs</h2>
+<p>Nesta sección <strong>fai só os dous primeiros apartados</strong> (<a href="https://catalog.workshops.aws/aws-batch-deep-dive/en-US/05-run-batch-jobs/51-single">Run a single job</a> e <a href="https://catalog.workshops.aws/aws-batch-deep-dive/en-US/05-run-batch-jobs/52-array">Run an array job</a>) seguindo os pasos do curso.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Actualiza a información do traballos e dos seus <em>logs</em> a medida que se executen premendo nos botóns que refrescan a información da consola.</p>
+</div>
+<h2 id="optimize-cost-with-ec2-spot">Optimize cost with EC2 Spot</h2>
+<p><strong>Sáltate esta sección</strong>. O Learner Lab de AWS Academy non permite utilizar instancias EC2 de tipo <em>spot</em>.</p>
+<h2 id="next-steps-and-clean-up">Next steps and clean up</h2>
+<p>Sigue os pasos do apartado <a href="https://catalog.workshops.aws/aws-batch-deep-dive/en-US/07-cleanup/72-cleanup">Clean up</a> tendo en conta o seguinte:</p>
+<ul>
+<li>No paso 5, desactiva o <em>Compute environment</em> antes de eliminalo.</li>
+<li><strong>Non fagas os pasos 7 e 8</strong>: <em>Empty the S3 bucket</em> e <em>Delete the CloudFormation stack</em>.</li>
+</ul>
+<p>Ademais, fai o seguinte: </p>
+<ul>
+<li>Na consola de Cloud9 elimina o ambiente <strong>MyCloud9Env</strong>.</li>
+</ul>
+<h2 id="licenza">Licenza</h2>
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Licenza Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Actividades adicionais para as prácticas de Computación na Nube para IoT</span> de <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/gei-eii/gei-eii.github.io" property="cc:attributionName" rel="cc:attributionURL">Xoán C. Pardo</a> ten unha licenza <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Recoñecemento-Non comercial 4.0 Internacional</a>.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = ".";</script>
+    <script src="js/theme_extra.js"></script>
+    <script src="js/theme.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.6.0
+Build Date UTC : 2024-11-16 20:24:11.556513+00:00
+-->
