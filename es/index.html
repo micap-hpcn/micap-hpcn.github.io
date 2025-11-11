@@ -1,96 +1,514 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="es" >
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Xoan C. Pardo" /><link rel="canonical" href="https://micap-hpcn.github.io/es/" />
-      <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>AWS Batch - HPC na Nube</title>
-    <link rel="stylesheet" href="../css/theme.css" />
-    <link rel="stylesheet" href="../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+<!DOCTYPE html><html lang="es" class="no-js"><head>
     
-      <script>
-        // Current page data
-        var mkdocs_page_name = "AWS Batch";
-        var mkdocs_page_input_path = "es/index.md";
-        var mkdocs_page_url = "/es/";
-      </script>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Xoan C. Pardo">
+      
+      
+        <link rel="canonical" href="https://micap-hpcn.github.io/es/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.1.6">
     
-    <!--[if lt IE 9]>
-      <script src="../js/html5shiv.min.js"></script>
-    <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-      <script>hljs.highlightAll();</script> 
-</head>
+    
+      
+        <title>AWS Batch - HPC en la Nube</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ded33207.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
 
-<body class="wy-body-for-nav" role="document">
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-    <div class="wy-side-scroll">
-      <div class="wy-side-nav-search">
-          <a href="./" class="icon icon-home"> HPC na Nube
+    
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#aws-batch" class="md-skip">
+          Saltar a contenido
         </a>
-      </div>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">AWS Batch</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#objetivo">Objetivo</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#workshop-setup">Workshop setup</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#building-a-docker-container">Building a Docker container</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#set-up-aws-batch-resources">Set up AWS Batch resources</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#set-up-a-compute-environment">Set up a Compute Environment</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#set-up-a-job-definition">Set up a Job Definition</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#run-batch-jobs">Run batch jobs</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#optimize-cost-with-ec2-spot">Optimize cost with EC2 Spot</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#next-steps-and-clean-up">Next steps and clean up</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#licencia">Licencia</a>
-    </li>
-    </ul>
-                </li>
-              </ul>
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="./" title="HPC en la Nube" class="md-header__button md-logo" aria-label="HPC en la Nube" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HPC en la Nube
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              AWS Batch
+            
+          </span>
+        </div>
       </div>
     </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="./">HPC na Nube</a>
-        
-      </nav>
-      <div class="wy-nav-content">
-        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="./" class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">AWS Batch</li>
-    <li class="wy-breadcrumbs-aside">
-    </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-            <div class="section" itemprop="articleBody">
+    
+    
+      <div class="md-header__option">
+        <div class="md-select">
+          
+          <button class="md-header__button md-icon" aria-label="Seleccionar idioma">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04M18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12m-2.62 7 1.62-4.33L19.12 17h-3.24Z"></path></svg>
+          </button>
+          <div class="md-select__inner">
+            <ul class="md-select__list">
               
-                <p><a href="/index.html">gl</a> / es</p>
+                <li class="md-select__item">
+                  <a href="/" hreflang="gl" class="md-select__link">
+                    Galego
+                  </a>
+                </li>
+              
+                <li class="md-select__item">
+                  <a href="/es/" hreflang="es" class="md-select__link">
+                    Español
+                  </a>
+                </li>
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="./" title="HPC en la Nube" class="md-nav__button md-logo" aria-label="HPC en la Nube" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"></path></svg>
+
+    </a>
+    HPC en la Nube
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          AWS Batch
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        AWS Batch
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo" class="md-nav__link">
+    Objetivo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workshop-setup" class="md-nav__link">
+    Workshop setup
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-a-docker-container" class="md-nav__link">
+    Building a Docker container
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-up-aws-batch-resources" class="md-nav__link">
+    Set up AWS Batch resources
+  </a>
+  
+    <nav class="md-nav" aria-label="Set up AWS Batch resources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-up-a-compute-environment" class="md-nav__link">
+    Set up a Compute Environment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-up-a-job-definition" class="md-nav__link">
+    Set up a Job Definition
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-batch-jobs" class="md-nav__link">
+    Run batch jobs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optimize-cost-with-ec2-spot" class="md-nav__link">
+    Optimize cost with EC2 Spot
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps-and-clean-up" class="md-nav__link">
+    Next steps and clean up
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#justificacion-de-la-practica" class="md-nav__link">
+    Justificación de la práctica
+  </a>
+  
+    <nav class="md-nav" aria-label="Justificación de la práctica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#building-a-docker-container_1" class="md-nav__link">
+    Building a Docker container
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-up-aws-batch-resources_1" class="md-nav__link">
+    Set up AWS Batch resources
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-batch-jobs-single-job" class="md-nav__link">
+    Run batch jobs (single job)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-batch-jobs-array-job" class="md-nav__link">
+    Run batch jobs (array job)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#licencia" class="md-nav__link">
+    Licencia
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo" class="md-nav__link">
+    Objetivo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workshop-setup" class="md-nav__link">
+    Workshop setup
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-a-docker-container" class="md-nav__link">
+    Building a Docker container
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-up-aws-batch-resources" class="md-nav__link">
+    Set up AWS Batch resources
+  </a>
+  
+    <nav class="md-nav" aria-label="Set up AWS Batch resources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-up-a-compute-environment" class="md-nav__link">
+    Set up a Compute Environment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-up-a-job-definition" class="md-nav__link">
+    Set up a Job Definition
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-batch-jobs" class="md-nav__link">
+    Run batch jobs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optimize-cost-with-ec2-spot" class="md-nav__link">
+    Optimize cost with EC2 Spot
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps-and-clean-up" class="md-nav__link">
+    Next steps and clean up
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#justificacion-de-la-practica" class="md-nav__link">
+    Justificación de la práctica
+  </a>
+  
+    <nav class="md-nav" aria-label="Justificación de la práctica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#building-a-docker-container_1" class="md-nav__link">
+    Building a Docker container
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-up-aws-batch-resources_1" class="md-nav__link">
+    Set up AWS Batch resources
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-batch-jobs-single-job" class="md-nav__link">
+    Run batch jobs (single job)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-batch-jobs-array-job" class="md-nav__link">
+    Run batch jobs (array job)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#licencia" class="md-nav__link">
+    Licencia
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
 <h1 id="aws-batch">AWS Batch</h1>
 <p><strong>Actividad práctica sobre AWS Batch</strong></p>
 <h2 id="objetivo">Objetivo</h2>
 <p>El objetivo de esta actividad es comprobar de manera práctica los conceptos básicos del servicio <a href="https://aws.amazon.com/batch/">AWS Batch</a>.</p>
+<p>La justificación de la realización de la práctica se hará mediante la entrega en la tarea configurada en el Aula Cesga de una memoria en formato PDF que contenga las capturas de pantalla que se piden para <a href="#justificacion-de-la-practica">justificar la práctica</a>.</p>
 <p>Para realizar esta actividad vamos a usar como base <a href="https://catalog.workshops.aws/aws-batch-deep-dive/en-US">este curso</a> disponible en la plataforma AWS Workshop Studio. El curso solo está disponible en inglés, pero puedes ayudarte, p. ej., de la traducción automática integrada en tu navegador si lo necesitas.</p>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
@@ -98,34 +516,30 @@
 </div>
 <p>A continuación se recogen las indicaciones adicionales que tendrás que tener en cuenta en cada sección del ejemplo:</p>
 <h2 id="workshop-setup">Workshop setup</h2>
-<p>Para realizar la actividad vamos a utilizar el Learner Lab de AWS Academy. <strong>No hagas lo que se indica en el curso</strong>, en su lugar sigue los pasos siguientes:</p>
+<p>Para realizar la actividad vamos a utilizar el Learner Lab de AWS Academy. Sigue los pasos siguientes:</p>
 <ol>
 <li>Accede a la consola AWS desde tu cuenta del Learner Lab de AWS Academy.</li>
-<li>Accede a la consola del servicio Cloud9 y sigue los pasos indicados <a href="https://catalog.workshops.aws/aws-batch-deep-dive/en-US/02-workshop-setup/01-own-account/02-create-cloud9">en este apartado</a> del curso para crear un entorno Cloud9. Usa los valores indicados en el curso con las siguientes excepciones:<ul>
-<li>En la propiedad <em>Timeout</em> de la sección <em>New EC2 Instance</em> elige <strong>1 hora</strong>.</li>
-<li>En la sección <em>Network settings</em> elige la conexión <strong>Secure Shell (SSH)</strong>.</li>
-</ul>
-</li>
-<li>Accede al entorno Cloud9 lanzado en el paso anterior y haz lo siguiente:<ul>
-<li>Instala <a href="https://jqlang.github.io/jq/">JQ</a> ejecutando en un terminal: <code>sudo yum -y install jq</code></li>
-<li>Para poder crear imágenes Docker necesitamos un espacio de disco mayor al proporcionado por defecto por Cloud9. Para aumentar el espacio del disco duro a 20GB ejecuta: <code>curl -s https://micap-hpcn.github.io/assets/resize.sh | bash /dev/stdin 20</code></li>
-<li>Comprueba que ahora el tamaño del disco es de 20GB ejecutando: <code>df -h</code></li>
-</ul>
-</li>
+<li>Una vez en la consola, sigue las instrucciones del curso para <a href="https://catalog.workshops.aws/aws-batch-deep-dive/en-US/02-workshop-setup/02-own-account#open-an-aws-cloudshell-terminal">acceder a una terminal CloudShell</a> y comprobar que puedes <a href="https://catalog.workshops.aws/aws-batch-deep-dive/en-US/02-workshop-setup/02-own-account#start-using-the-aws-cli">usar la CLI de AWS</a>.</li>
 </ol>
-<p><em>Imagen: tamaño del disco después de redimensionarlo a 20GB.</em>
-<img alt="Tamaño del disco" src="../assets/cloud9-df01.png" /></p>
 <h2 id="building-a-docker-container">Building a Docker container</h2>
 <p>En esta sección sigue los pasos del curso.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Para subir la imagen Docker a Amazon ECR accede al servicio ECR desde la consola AWS del Learner Lab, no usando los enlaces del curso.</p>
+</div>
 <h2 id="set-up-aws-batch-resources">Set up AWS Batch resources</h2>
 <p>En esta sección sigue los pasos del curso teniendo en cuenta lo siguiente:</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Accede al servicio AWS Batch desde la consola AWS del Learner Lab, no usando los enlaces del curso.</p>
+</div>
 <h4 id="set-up-a-compute-environment">Set up a Compute Environment</h4>
 <ul>
 <li>En el paso 6, en la propiedad <em>Instance role</em> elige <strong>LabInstanceProfile</strong>.</li>
 </ul>
 <h4 id="set-up-a-job-definition">Set up a Job Definition</h4>
 <ul>
-<li>En el paso 8, elige <strong>LabRole</strong> en las propiedades <em>Execution role</em> y <em>Job role configuration</em>.</li>
+<li>Antes de pulsar <strong>Next</strong> en el paso 9, elige <strong>LabRole</strong> en las propiedades <em>Execution role</em> y <em>Job role configuration</em>.</li>
 </ul>
 <h2 id="run-batch-jobs">Run batch jobs</h2>
 <p>En esta sección <strong>haz solo los dos primeros apartados</strong> (<a href="https://catalog.workshops.aws/aws-batch-deep-dive/en-US/05-run-batch-jobs/51-single">Run a single job</a> y <a href="https://catalog.workshops.aws/aws-batch-deep-dive/en-US/05-run-batch-jobs/52-array">Run an array job</a>) siguiendo los pasos del curso.</p>
@@ -136,53 +550,98 @@
 <h2 id="optimize-cost-with-ec2-spot">Optimize cost with EC2 Spot</h2>
 <p><strong>Sáltate esta sección</strong>. El Learner Lab de AWS Academy no permite utilizar instancias EC2 de tipo <em>spot</em>.</p>
 <h2 id="next-steps-and-clean-up">Next steps and clean up</h2>
+<div class="admonition danger">
+<p class="admonition-title">Importante</p>
+<p>No olvides tomar las capturas que se piden para <a href="#justificacion-de-la-practica">justificar la práctica</a> antes de eliminar los recursos.</p>
+</div>
 <p>Sigue los pasos del apartado <a href="https://catalog.workshops.aws/aws-batch-deep-dive/en-US/07-cleanup/72-cleanup">Clean up</a> teniendo en cuenta lo siguiente:</p>
 <ul>
 <li>En el paso 5, desactiva el <em>Compute environment</em> antes de eliminarlo.</li>
 <li><strong>No hagas los pasos 7 y 8</strong>: <em>Empty the S3 bucket</em> y <em>Delete the CloudFormation stack</em>.</li>
 </ul>
-<p>Además, haz lo siguiente:</p>
-<ul>
-<li>En la consola de Cloud9 elimina el entorno <strong>MyCloud9Env</strong>.</li>
-</ul>
+<h2 id="justificacion-de-la-practica">Justificación de la práctica</h2>
+<p>Toma las siguientes capturas para la memoria de justificación de la práctica:</p>
+<div class="admonition warning">
+<p class="admonition-title">Importante</p>
+<p>Las capturas tienen que incluír el menú superior de la consola AWS <strong>en el que pueda verse claramente tu nombre de usuario</strong>. De no cumplirse este requisito la práctica no será válida.</p>
+</div>
+<h5 id="building-a-docker-container_1">Building a Docker container</h5>
+<ol>
+<li>Imagen <strong>stress-ng:latest</strong> subida al repositorio de Amazon ECR. Tiene que mostrar la misma información que el <a href="https://static.us-east-1.prod.workshops.aws/public/9f26103a-4265-415c-89d6-b5beaa8b190e/static/build_container/ecr-5.png">ejemplo del curso</a>.</li>
+</ol>
+<h5 id="set-up-aws-batch-resources_1">Set up AWS Batch resources</h5>
+<ol start="2">
+<li>Propiedades del entorno de computación <strong>stress-ng-ec2</strong>. La captura tiene que mostrar la misma información que el <a href="https://static.us-east-1.prod.workshops.aws/public/9f26103a-4265-415c-89d6-b5beaa8b190e/static/setup_batch/ce-5.png">ejemplo del curso</a>.</li>
+<li>Propiedades de la cola de trabajos <strong>stress-ng-queue</strong>. La captura tiene que mostrar la misma información que el <a href="https://static.us-east-1.prod.workshops.aws/public/9f26103a-4265-415c-89d6-b5beaa8b190e/static/setup_batch/jq-3.png">ejemplo del curso</a>.</li>
+<li>Propiedades de la definición del trabajo <strong>stress-ng-job-definition</strong>. La captura tiene que mostrar la misma información que el <a href="https://static.us-east-1.prod.workshops.aws/public/9f26103a-4265-415c-89d6-b5beaa8b190e/static/setup_batch/jd-5.png">ejemplo del curso</a>.</li>
+</ol>
+<h5 id="run-batch-jobs-single-job">Run batch jobs (single job)</h5>
+<ol start="5">
+<li><em>Log</em> de la ejecución del trabajo <strong>stress-ng-job</strong> en Cloudwatch. La captura tiene que mostrar la misma información que el <a href="https://static.us-east-1.prod.workshops.aws/public/9f26103a-4265-415c-89d6-b5beaa8b190e/static/single_job/job-8.png">ejemplo del curso</a>.</li>
+<li>
+<p>Terminal de CloudShell mostrando la salida de la ejecución del comando <code>aws batch describe-jobs --jobs &lt;YOUR-JOB-ID&gt;</code> para el trabajo <strong>stress-ng-1</strong> en estado <strong>SUCCEEDED</strong>.</p>
+<details class="example">
+<summary>Ejemplo</summary>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/cloudshell-job01.png" data-desc-position="bottom"><img alt="Estado del trabajo en la terminal de CloudShell." src="../assets/cloudshell-job01.png"></a></p>
+</details>
+</li>
+</ol>
+<h5 id="run-batch-jobs-array-job">Run batch jobs (array job)</h5>
+<ol start="7">
+<li>
+<p>Propiedades en la consola de AWS Batch del array de trabajos <strong>stress-ng-array</strong> en estado <strong>SUCCEEDED</strong> y con la pestaña <strong>Child jobs</strong> seleccionada.</p>
+<details class="example">
+<summary>Ejemplo</summary>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../assets/batch-arrayjob01.png" data-desc-position="bottom"><img alt="Estado del array de trabajos enE AWS Batch." src="../assets/batch-arrayjob01.png"></a></p>
+</details>
+</li>
+</ol>
 <h2 id="licencia">Licencia</h2>
-<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Licenza Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Actividad práctica sobre AWS Batch</span> de <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/gei-eii/gei-eii.github.io" property="cc:attributionName" rel="cc:attributionURL">Xoán C. Pardo</a> tiene una licencia <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Reconocimiento-No comercial 4.0 Internacional</a>.</p>
-              
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Licenza Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"></a><br><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Actividad práctica sobre AWS Batch</span> de <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/gei-eii/gei-eii.github.io" property="cc:attributionName" rel="cc:attributionURL">Xoán C. Pardo</a> tiene una licencia <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Reconocimiento-No comercial 4.0 Internacional</a>.</p>
+
+
+
+
+
+                
+              </article>
             </div>
-          </div><footer>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <!-- Copyright etc -->
-  </div>
-
-  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-</footer>
+          
           
         </div>
-      </div>
-
-    </section>
-
-  </div>
-
-  <div class="rst-versions" role="note" aria-label="Versions">
-  <span class="rst-current-version" data-toggle="rst-current-version">
-    
-    
-    
-  </span>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
 </div>
-    <script src="../js/jquery-3.6.0.min.js"></script>
-    <script>var base_url = "..";</script>
-    <script src="../js/theme_extra.js"></script>
-    <script src="../js/theme.js"></script>
-    <script>
-        jQuery(function () {
-            SphinxRtdTheme.Navigation.enable(true);
-        });
-    </script>
-
-</body>
-</html>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.51198bba.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": false, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
